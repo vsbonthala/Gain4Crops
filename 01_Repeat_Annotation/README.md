@@ -27,7 +27,7 @@ Prior to running the script, make sure to edit the variables inside `runEDTA_Sba
 ### Execute the Annotation (`edta.sh`)
 
 ```bash
-sbatch edta.sh
+sbatch runEDTA_Sbatch.sh
 ```
 
 * **Input:** The curated, purged genome assembly file (`.fasta` or `.fa`) resulting from the previous purging step.
