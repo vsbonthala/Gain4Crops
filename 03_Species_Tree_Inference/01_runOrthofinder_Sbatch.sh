@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#SBATCH --mail-type all
 #SBATCH --job-name=OrthoFinder
 #SBATCH --output=%x_%j.out
 #SBATCH --error=%x_%j.err
