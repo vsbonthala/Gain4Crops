@@ -1,6 +1,6 @@
 # Genome Assembly and Assessment Pipeline
 
-This repository contains a streamlined pipeline for *de novo* genome assembly, diploid assembly purging, and quality assessment. The workflow is divided into three main bash scripts designed to be run sequentially.
+This project contains a streamlined pipeline for *de novo* genome assembly, diploid assembly purging, and quality assessment. The workflow is divided into three main bash scripts designed to be run sequentially.
 
 ## 🧬 Pipeline Overview
 
@@ -12,22 +12,21 @@ This repository contains a streamlined pipeline for *de novo* genome assembly, d
 
 ## 🛠️ Prerequisites
 
-To run these scripts, ensure the following software is installed and available in your system's PATH or module system:
+To run these scripts, ensure the following software is installed and available in your system's PATH or cluster module system:
 
-* **[Supernova](https://support.10xgenomics.com/de-novo-assembly/software/overview/welcome)** (10x Genomics)
-* **[Purge Haplotigs](https://bitbucket.org/mroachawri/purge_haplotigs/src/master/)** (and its dependencies like Minimap2 and BEDTools)
-* **[BUSCO](https://busco.ezlab.org/)** (Benchmarking Universal Single-Copy Orthologs)
-* A job scheduler like **SLURM** (if running on a high-performance computing cluster).
+* **Supernova** (10x Genomics)
+* **Purge Haplotigs** (including dependencies like Minimap2 and BEDTools)
+* **BUSCO** (Benchmarking Universal Single-Copy Orthologs)
+* **SLURM** (or your respective high-performance computing job scheduler)
 
 ---
 
 ## 🚀 Usage Instructions
 
-The pipeline is split into three scripts. Execute them in the following order:
+Execute the scripts in the following order. Make sure to edit each script prior to execution to match your specific file paths, cluster allocation accounts, and email addresses for logging.
 
 ### Step 1: Genome Assembly (`script1.sh`)
-This script runs the `stlfr2supernova_pipeline` and utilizes Supernova to generate a *de novo* pseudohaploid assembly from 10x linked-read data.
+This script utilizes Supernova to generate a *de novo* pseudohaploid assembly from linked-read data.
 
 ```bash
-# Example execution (adjust for your job scheduler, e.g., sbatch)
 sbatch script1.sh
