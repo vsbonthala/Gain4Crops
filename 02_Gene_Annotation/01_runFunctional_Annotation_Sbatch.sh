@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#SBATCH --mail-type all
 #SBATCH --job-name=FunAnnot
 #SBATCH --output=%x_%j.out
 #SBATCH --error=%x_%j.err
@@ -16,10 +14,8 @@
 eval "$(conda shell.bash hook)"
 conda activate ~/miniconda3/envs/MAKER
 
-# Ref: https://github.com/xvazquezc/genome_annotation_with_Maker2/blob/master/Maker2_protocol/Maker2_protocol.md#the-third-and-final-run
-
-# Get inputs
-genome="C_basalis"
+# Get Species Name
+genome=$1
 
 echo "Species codes used for prefix "+ $genome
 echo " "
