@@ -35,88 +35,57 @@ To run these scripts, ensure the following software is installed and available i
 
 Execute the scripts in the following order. Ensure you edit the header parameters and internal paths in each script before submitting them to your cluster.
 
-### Step 1: Orthology Inference (`01_orthofinder.sh`)
+### Step 1: Orthology Inference (`01_runOrthofinder_Sbatch.sh`)
 This script groups input proteomes (FASTA files of predicted proteins) into orthologous groups and identifies Hierarchical Orthologous Groups (HOGs).
 
 ```bash
-sbatch 01_orthofinder.sh
+sbatch 01_runOrthofinder_Sbatch.sh
 ```
 
 * **Input:** A directory containing protein FASTA files for all target species.
 * **Output:** OrthoFinder results, specifically the `Phylogenetic_Hierarchical_Orthogroups/N0.tsv` file mapping genes to HOGs.
 
-### Step 2: HOG Classification (`02_classify_hogs.sh`)
+### Step 2: HOG Classification (`02_Classify_HOGs.py`)
 This script parses the OrthoFinder output to categorize HOGs based on duplication history and copy number (e.g., isolating strict single-copy orthologs, low-copy, or multi-copy families).
 
 ```bash
-sbatch 02_classify_hogs.sh
+sbatch 02_Classify_HOGs.py
 ```
 
 * **Input:** The `N0.tsv` file from Step 1.
 * **Output:** Flat text files or TSVs listing HOG IDs categorized by class (e.g., `single_copy_hogs.txt`).
 
-### Step 3: Sequence Extraction (`03_extract_seqs.sh`)
+### Step 3: Compute Phylogenetic Trees for each HOG (`03_Compute_Phylogenetic_Trees_HOGs.py`)
 For each classified HOG of interest, this script uses Python's `SeqIO` (FastaRecords) to extract the corresponding protein and matching nucleotide sequences.
 
 ```bash
-sbatch 03_extract_seqs.sh
+python3 03_Compute_Phylogenetic_Trees_HOGs.py
 ```
 
 * **Input:** * Classified HOG lists (from Step 2).
   * Original protein and coding sequence (CDS) FASTA files.
-* **Output:** Individual multi-FASTA files containing unaligned sequences for each targeted HOG (e.g., `HOG0001_pep.fa` and `HOG0001_cds.fa`).
-
-### Step 4: Multiple Sequence Alignment (`04_mafft_align.sh`)
-This script aligns the extracted protein sequences for each HOG using MAFFT.
-
-```bash
-sbatch 04_mafft_align.sh
-```
-
-* **Input:** Unaligned protein FASTA files from Step 3.
-* **Output:** Aligned protein FASTA files (e.g., `HOG0001_pep_aligned.fa`).
-
-### Step 5: Codon Alignment (`05_pal2nal.sh`)
-To perform codon-aware nucleotide alignments, this script uses PAL2NAL to map the corresponding nucleotide sequences (CDS) onto the aligned protein templates.
-
-```bash
-sbatch 05_pal2nal.sh
-```
-
-* **Input:** * Aligned protein FASTA files (from Step 4).
-  * Matching unaligned nucleotide (CDS) FASTA files (from Step 3).
-* **Output:** Codon-aligned nucleotide alignments (e.g., `HOG0001_codon_aligned.fa`).
-
-### Step 6: Individual Gene Tree Reconstruction (`06_raxml.sh`)
-This script uses RAxML to infer maximum-likelihood phylogenetic trees for each aligned HOG.
-
-```bash
-sbatch 06_raxml.sh
-```
-
-* **Input:** Codon-aligned (or protein-aligned) FASTA files.
 * **Output:** Best-scoring ML tree files (`RAxML_bestTree.[HOG_ID]`) for each gene family.
 
 ---
 
-### Step 7a: Species Tree via Multi-Species Coalescent (`07a_astral.sh`)
+### Step 4: Species Tree via Multi-Species Coalescent (`4_SpeciesTree_MSC_Approach.sh`)
 This script pools individual gene trees and uses **ASTRAL-pro3** to infer a species tree. ASTRAL-pro3 is designed specifically to handle multi-copy gene families (paralogs and orthologs), accounting for gene duplication and loss.
 
 ```bash
-sbatch 07a_astral.sh
+bash 4_SpeciesTree_MSC_Approach.sh
 ```
 
 * **Input:** A concatenated file containing all individual gene trees generated in Step 6 (e.g., `all_gene_trees.tre`).
 * **Output:** A coalescent-based species tree in Newick format.
 
-### Step 7b: Species Tree via Concatenation (`07b_supermatrix.sh`)
+### Step 5: Species Tree via Concatenation (`05_SpeciesTree_Partition_SuperMatrix.sh`)
 This script performs a traditional supermatrix-based phylogenomics analysis using only high-confidence **single-copy HOGs**:
 1. **Concatenation:** Glues the single-copy codon alignments end-to-end into a single super-matrix.
 2. **Partitioning:** Uses **PartitionFinder** to define the optimal partitioning scheme and select evolutionary models (e.g., separating by gene or codon positions).
 3. **Reconstruction:** Performs a partitioned ML analysis using **RAxML** on the supermatrix.
 
 ```bash
-sbatch 07b_supermatrix.sh
+bash 05_SpeciesTree_Partition_SuperMatrix.sh
 ```
 
 * **Input:** Codon-aligned FASTA files for single-copy HOGs.
