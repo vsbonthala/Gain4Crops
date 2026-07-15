@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#SBATCH --mail-type all
 #SBATCH --job-name=BUSCO
 #SBATCH --output=%x_%j.out
 #SBATCH --error=%x_%j.err
@@ -15,7 +13,7 @@ eval "$(conda shell.bash hook)"
 conda activate BUSCO
 
 # Get species name
-genome="C_basalis"
+genome=$1
 
 
 # BUSCO analysis on raw and final gene annotation
