@@ -49,7 +49,7 @@ sbatch 01_runOrthofinder_Sbatch.sh
 This script parses the OrthoFinder output to categorize HOGs based on duplication history and copy number (e.g., isolating strict single-copy orthologs, low-copy, or multi-copy families).
 
 ```bash
-sbatch 02_Classify_HOGs.py
+python3 02_Classify_HOGs.py
 ```
 
 * **Input:** The `N0.tsv` file from Step 1.
