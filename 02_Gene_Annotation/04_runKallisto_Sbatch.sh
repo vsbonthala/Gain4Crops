@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#SBATCH --mail-type all
 #SBATCH --job-name=Kallisto
 #SBATCH --output=%x_%j.out
 #SBATCH --error=%x_%j.err
@@ -15,8 +13,8 @@
 mkdir -p expression && cd expression
 
 
-# Get the name of the genome
-genome="C_basalis"
+# Get Species Name
+genome=$1
 transcripts=../"$genome"__genome_Helixer.functions.IPScan.AA50.nonTE.transcripts.fa
 
 
