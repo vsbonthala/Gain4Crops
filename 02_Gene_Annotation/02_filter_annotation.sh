@@ -3,8 +3,8 @@
 # 2. Find TE-related genes using PFAM IDs of TE-related genes (The list was curated for the SHAPE project) and Keywords of TE-related genes.
 # 3. Create final Non-TE Genes with AA length >=50
 
-# Inputs
-genome="C_basalis"
+# Get Species Name
+genome=$1
 
 
 # Tools paths
