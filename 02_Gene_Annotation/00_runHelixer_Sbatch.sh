@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#SBATCH --mail-type all
 #SBATCH --job-name=Helixer
 #SBATCH --output=%x_%j.out
 #SBATCH --error=%x_%j.err
@@ -23,8 +21,8 @@ module load system singularity
 # Run Helixer
 echo "Running Helixer..."
 
-# Set species name
-IN="C_basalis"
+# Get species name
+IN=$1
 
 singularity run helixer-docker_helixer_v0.3.0a0_cuda_11.2.0-cudnn8.sif Helixer.py \
                 --fasta-path "$IN"_genome.fa \
