@@ -1,6 +1,6 @@
 # Species Tree Inference Pipeline (HOGs & Phylogenomics)
 
-This project contains a multi-step phylogenomics pipeline designed to infer a species tree starting from proteome sequences. The workflow runs through orthology inference, classification, alignment, codon-aware translation, individual gene tree reconstruction, and finally, species tree estimation using both **coalescent-based** and **supermatrix-based** approaches.
+This directory contains a multi-step phylogenomics pipeline designed to infer a species tree starting from proteome sequences. The workflow runs through orthology inference, classification, alignment, codon-aware translation, individual gene tree reconstruction, and finally, species tree estimation using both **coalescent-based** and **supermatrix-based** approaches.
 
 ## 🧬 Pipeline Overview
 
