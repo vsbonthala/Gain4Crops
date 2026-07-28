@@ -1,6 +1,6 @@
 # Species Tree Inference Pipeline (HOGs & Phylogenomics)
 
-This directory contains a multi-step phylogenomics pipeline designed to infer a species tree starting from proteome sequences. The workflow runs through orthology inference, classification, alignment, codon-aware translation, individual gene tree reconstruction, and finally, species tree estimation using both **coalescent-based** and **supermatrix-based** approaches.
+This directory contains a multi-step phylogenomics pipeline designed to infer a species tree starting from proteome sequences. The workflow runs through orthology inference, classification, alignment, codon-aware translation, individual gene tree reconstruction, species tree estimation using both **coalescent-based** and **supermatrix-based** approaches, and finally dating speciestion.
 
 ## 🧬 Pipeline Overview
 
@@ -92,3 +92,6 @@ bash 05_SpeciesTree_Partition_SuperMatrix.sh
 * **Output:** * Concatenated supermatrix file (e.g., PHYLIP or FASTA format).
   * PartitionFinder configuration and output files.
   * A resolved maximum-likelihood species tree based on the supermatrix.
+
+### Step 6: Dating speciation
+Divergence times were estimated using Bayesian relaxed-clock model implemented in MCMCtree. This analysis was calibrated with three fossil-based reference points.
