@@ -18,7 +18,7 @@ This directory contains a multi-step pipeline designed to identify whole-genome 
 
 To run this analysis, ensure the following software is installed and available in your environment or loaded via your cluster module system:
 
-* **wgd**
+* **wgd** (`https://github.com/arzwa/wgd`)
 * **Python's KDE**
 
 ---
