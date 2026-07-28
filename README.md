@@ -1,9 +1,6 @@
 # GAIN4CROPS
 
-This repository contains a comprehensive workflows/pipleines for computing *de novo* genome assemblies and annotation, inferring species tree, investigation of whole-genome duplications and phylogenetic association mapping of genotype (CNV of HPGs and MapMan BINs) against phenotype (CCP) as part of the Gain4Crops project (`http://gain4crops.eu`).
-
-
-An end-to-end pipeline for *de novo* genome assembly, structural and functional annotation, and species tree phylogenomics.
+This repository contains pipelines for computing *de novo* genome assemblies and annotation, inferring species tree, investigation of whole-genome duplications and phylogenetic association mapping of genotype (CNV of HPGs and MapMan BINs) against phenotype (CCP) as part of the Gain4Crops project (`http://gain4crops.eu`).
 
 ---
 
@@ -11,36 +8,35 @@ An end-to-end pipeline for *de novo* genome assembly, structural and functional 
 
 The workflow is divided into three main stages:
 
-### 1. Genome Assembly & Purging (`/assembly`)
-* **Step 1 (`script1.sh`):** *De novo* assembly using Supernova.
-* **Step 2 (`script2.sh`):** Haplotig purging using Purge Haplotigs.
-* **Step 3 (`busco.sh`):** Completeness check with BUSCO.
+### 1. Genome Assembly & Purging (`/00_Genome_Assembly`)
+* **Step 1 (`runSupernova_Sbatch.sh`):** *De novo* assembly using Supernova.
+* **Step 2 (`runPurgeHaplotigs_SBATCH.sh`):** Haplotig purging using Purge Haplotigs.
+* **Step 3 (`runBUSCO_Sbatch.sh`):** Completeness check with BUSCO.
 
-### 2. Repeat & Gene Annotation (`/annotation`)
-* **Step 1 (`edta.sh`):** Transposable element masking with EDTA.
-* **Step 2 (`helixer.sh`):** *De novo* gene prediction using Helixer.
-* **Step 3 (`interproscan.sh`):** Functional annotation with InterProScan.
-* **Step 4 (`filter_te_genes.sh`):** Filtering TE-related genes using Pfam domains.
-* **Step 5 (`quantify_expression.sh`):** RNA-Seq gene expression quantification.
-* **Step 6 (`busco.sh`):** Completeness check of predicted proteins.
+### 2. Repeat & Gene Annotation (`/01_Repeat_Annotation and /02_Gene_Annotation`)
+* **Step 1 (`runEDTA_Sbatch.sh`):** Transposable element masking with EDTA.
+* **Step 2 (`00_runHelixer_Sbatch.sh`):** *De novo* gene prediction using Helixer.
+* **Step 3 (`01_runFunctional_Annotation_Sbatch.sh`):** Functional annotation with InterProScan.
+* **Step 4 (`02_filter_annotation.sh`):** Filtering TE-related genes using Pfam domains.
+* **Step 5 (`04_runKallisto_Sbatch.sh`):** RNA-Seq gene expression quantification.
+* **Step 6 (`03_runBUSCO_Sbatch.sh`):** Completeness check of predicted proteins.
 
-### 3. Species Tree Inference (`/phylogenomics`)
-* **Step 1 & 2 (`01_orthofinder.sh`, `02_classify_hogs.sh`):** HOG identification and copy-number classification.
-* **Step 3, 4, 5 & 6:** Sequence extraction, MAFFT alignment, PAL2NAL codon alignment, and individual RAxML gene tree building.
-* **Step 7a (`07a_astral.sh`):** Coalescent-based species tree using ASTRAL-pro3.
-* **Step 7b (`07b_supermatrix.sh`):** Supermatrix concatenation, PartitionFinder optimization, and RAxML species tree reconstruction.
+### 3. Species Tree Inference (`/03_Species_Tree_Inference`)
+* **Step 1 & 2 (`01_runOrthofinder_Sbatch.sh`, `02_Classify_HOGs.py`):** HOG identification and copy-number classification.
+* **Step 3 (`03_Compute_Phylogenetic_Trees_HOGs.py`):** Compute gene trees for each HOG.
+* **Step 4 (`04_SpeciesTree_MSC_Approach.sh`):** Compute a species tree using MSC approach.
+* **Step 5 (`05_SpeciesTree_Partition_SuperMatrix.sh`):** Compute a species tree using super-matrix based approach.
+
+### 4. Whole Genome Duplications (`/04_Whole_Genome_Duplications`)
+* **Step 1 (`runWGD_SBATCH.sh`):** Compute paralogous clusters and Ks values for each duplicate gene pair.
+* **Step 2 (`Identify_Ks_Peaks_KDE.py`):** Identify prominent Ks peaks corresponding to whole-genome duplications.
+* **Step 3 (`runTree2GD.sh`):** Perform gene tree-species tree reconciliation to place whole-genome duplication events on species tree.
+
+### 5. Interspecies Association Analysis (`/05_Interspecies_Association_Analysis`)
+* **Step 1 (`PAM_Crunch_MapMan_BINS.R`):** Perform phylogenetic association mapping (PAM) to link genotype (CNVs of HOGs/MapMan BINs) against phenotype (CCP: CO2 Compensation Points)
 
 ---
 
-## 🚀 How to Run
+## 🚀 Citation:
 
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/your-username/gain4crop.git](https://github.com/your-username/gain4crop.git)
-   ```
-2. Navigate to the respective directory (`/assembly`, `/annotation`, or `/phylogenomics`).
-3. Edit the SLURM headers (`#SBATCH`) and path variables inside the scripts.
-4. Submit jobs in sequential order:
-   ```bash
-   sbatch <script_name>.sh
-   ```
+
