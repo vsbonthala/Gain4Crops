@@ -1,5 +1,8 @@
 # GAIN4CROPS
 
+This repository contains a comprehensive workflows/pipleines for computing *de novo* genome assemblies and annotation, inferring species tree, investigation of whole-genome duplications and phylogenetic association mapping of genotype (CNV of HPGs and MapMan BINs) against phenotype (CCP) as part of the Gain4Crops project (`http://gain4crops.eu`).
+
+
 An end-to-end pipeline for *de novo* genome assembly, structural and functional annotation, and species tree phylogenomics.
 
 ---
