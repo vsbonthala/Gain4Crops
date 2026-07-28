@@ -1,4 +1,4 @@
-# Repeat Annotation Pipeline
+# Repeat Annotation
 
 This project contains a streamlined workflow for identifying, classifying, and masking transposable elements and repetitive regions in a genome assembly. The pipeline runs the **EDTA (Extensive de-novo TE Annotator)** tool on a purged genome assembly.
 
@@ -35,4 +35,4 @@ sbatch runEDTA_Sbatch.sh
 * **Output:** * A comprehensive non-redundant TE library (`[genome_name].EDTA.TElib.fa`).
   * A TE-masked genome file (`curated.fa.mod.MAKER.masked`).
   * GFF3 files containing coordinate annotations of the transposable elements (`curated.fa.mod.EDTA.TEanno.gff3`).
-  * Summary statistics file containing list of identified repeat types (`curated.fa.mod.EDTA.TEanno.sum`).
+  * Summary statistics file containing list of identified repeat types (`curated.fa.fa.mod.EDTA.TEanno.sum`).
