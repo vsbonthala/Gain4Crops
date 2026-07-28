@@ -1,6 +1,6 @@
-# Gene Annotation, Functional Annotation, Filtering, and Expression Quantification Pipeline
+# Gene Annotation
 
-This project contains a comprehensive pipeline for eukaryotic gene prediction, functional characterization, transposable element (TE) filtering, RNA-Seq-based gene expression quantification, and completeness assessment. The workflow is divided into five main bash scripts designed to be run sequentially.
+This directory contains a comprehensive pipeline for eukaryotic gene prediction, functional characterization, transposable element (TE) filtering, RNA-Seq-based gene expression quantification, and completeness assessment. The workflow is divided into five main bash scripts designed to be run sequentially.
 
 ## 🧬 Pipeline Overview
 
@@ -16,12 +16,11 @@ This project contains a comprehensive pipeline for eukaryotic gene prediction, f
 
 To run these scripts, ensure the following software is installed and available in your system's PATH or cluster module system:
 
-* **Helixer** (Highly recommended to run on a GPU-enabled node via Singularity/Apptainer)
+* **Helixer** (Highly recommended to run on a GPU-enabled node via Singularity/Apptainer, https://github.com/usadellab/Helixer)
 * **InterProScan** (along with its signature databases, e.g., Pfam, PANTHER)
-* **Python 3** (with `pandas` or standard parsing libraries for filtering) or **Bedtools/Awk**
 * **RNA-Seq Aligner & Quantifier:** **STAR** or **HISAT2** (for alignment), and **Kallisto**, **Salmon**, or **featureCounts** (for quantification)
 * **BUSCO** (Benchmarking Universal Single-Copy Orthologs)
-* **SLURM** (or your respective high-performance computing job scheduler)
+
 
 ---
 
