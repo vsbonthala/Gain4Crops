@@ -16,7 +16,6 @@ This directory contains a pipeline for performing PAM to link the genotype (gene
 
 Execute the scripts in the following order. Make sure to edit each script prior to execution to match your specific file paths, cluster allocation accounts, and email addresses for logging.
 
-### Step 1: Genome Assembly (runSupernova_Sbatch.sh)
 
 ```bash
 Rscript --vanilla PAM_Crunch_MapMan_BINS.R
