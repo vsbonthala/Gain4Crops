@@ -38,5 +38,23 @@ The workflow is divided into three main stages:
 ---
 
 ## 🚀 Citation:
+[![bioRxiv](https://img.shields.io/badge/bioRxiv-10.64898%2F2026.11.05.764543-b31b1b.svg)](https://doi.org/10.64898/2026.11.05.764543)
+
+If you use this repository or dataset in your research, please cite:
+
+> Bonthala, V. S., Kafoutchoni, K. M., Krey, S., Schlüter, U., Weber, A. P. M., Tolleter, D. & Stich, B. Ancestral polyploidy and non-linear dosage shifts define the photosynthetic transition in the Heliantheae alliance. Preprint at *bioRxiv* [https://doi.org/10.64898/2026.11.05.764543](https://doi.org/10.64898/2026.11.05.764543) (2026).
+
+### BibTeX
+
+```bibtex
+@article{Bonthala2026,
+  author  = {Bonthala, Venkata Suresh and Kafoutchoni, Konoutan M. and Krey, Stephanie and Schlüter, Urte and Weber, Andreas P. M. and Tolleter, Dimitri and Stich, Benjamin},
+  title   = {Ancestral polyploidy and non-linear dosage shifts define the photosynthetic transition in the Heliantheae alliance},
+  journal = {bioRxiv},
+  year    = {2026},
+  doi     = {10.64898/2026.11.05.764543},
+  url     = {[https://doi.org/10.64898/2026.11.05.764543](https://doi.org/10.64898/2026.11.05.764543)}
+}
+```
 
 
